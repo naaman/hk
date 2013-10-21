@@ -204,11 +204,12 @@ func runAPI(cmd *Command, args []string) {
 		cmd.printUsage()
 		os.Exit(2)
 	}
+	method := strings.ToUpper(args[0])
 	var body io.Reader
-	if args[0] != "GET" {
+	if method != "GET" {
 		body = os.Stdin
 	}
-	if err := APIReq(os.Stdout, args[0], args[1], body); err != nil {
+	if err := APIReq(os.Stdout, method, args[1], body); err != nil {
 		log.Fatal(err)
 	}
 }
